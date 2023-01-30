@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/update_menu"
+        android:title="@string/update"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/delete_menu"
+        android:title="@string/delete"
+        app:showAsAction="never">
+
+    </item>
+
+    <item
+        android:id="@+id/rental_menu"
+        android:title="@string/rental"
+        app:showAsAction="never">
+    </item>
+
+    <item
+        android:id="@+id/search_menu"
+        android:title="@string/search"
+        android:icon="@drawable/search_image"
+        app:showAsAction="ifRoom">
+    </item>
+
+</menu>

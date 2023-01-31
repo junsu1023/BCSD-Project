@@ -3,15 +3,15 @@ package com.example.myapplication.view
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.databinding.SignUpActivityBinding
 
 class SignUpActivity : AppCompatActivity(){
-    private lateinit var binding: ActivityMainBinding //바인딩할 xml 이름으로 수정
+    private lateinit var binding: SignUpActivityBinding //바인딩할 xml 이름으로 수정
     // 파이어베이스 인증을 위한 객체
     private var auth : FirebaseAuth? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater) // 바인딩할 xml 이름으로 수정
+        binding = SignUpActivityBinding.inflate(layoutInflater) // 바인딩할 xml 이름으로 수정
         val view = binding.root
         setContentView(view)
 

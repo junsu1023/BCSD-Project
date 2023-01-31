@@ -4,23 +4,23 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.databinding.SignInActivityBinding
 
 class SignInActivity : AppCompatActivity(){
-    private lateinit var binding: ActivityMainBinding //바인딩할 xml 이름으로 수정
+    private lateinit var binding: SignInActivityBinding //바인딩할 xml 이름으로 수정
     // 파이어베이스 인증을 위한 객체
     private var auth : FirebaseAuth? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = SignInActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 
         auth = Firebase.auth
 
         binding.signinBtn.setOnClickListener{
-            val intent_main = Intent(this, CreateAccountActivity::class.java)
+            val intent_main = Intent(this, SignInActivity::class.java)
             startActivity(intent_main)
         } // 회원가입 버튼
 

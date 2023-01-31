@@ -19,7 +19,7 @@ class SignInActivity : AppCompatActivity(){
 
         auth = Firebase.auth
 
-        binding.signinBtn.setOnClickListener{
+        binding.signInBtn.setOnClickListener{
             val intent_main = Intent(this, SignInActivity::class.java)
             startActivity(intent_main)
         } // 회원가입 버튼

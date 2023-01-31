@@ -8,7 +8,7 @@
         android:id="@+id/user_id"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:hint="아이디"
+        android:hint="@string/input_email"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -19,27 +19,28 @@
         android:layout_width="250dp"
         android:layout_height="wrap_content"
         android:id="@+id/user_psw"
-        android:hint="비밀번호"
+        android:hint="@string/input_psw"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_id"
+        android:inputType="textPassword"
         />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/login_btn"
-        android:text="로그인"
+        android:text="@string/sign_in"
         app:layout_constraintTop_toBottomOf="@id/user_psw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/signin_btn"/>
+        app:layout_constraintEnd_toStartOf="@id/sign_in_btn"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/signin_btn"
-        android:text="회원가입"
+        android:id="@+id/sign_in_btn"
+        android:text="@string/sign_up"
         app:layout_constraintTop_toBottomOf="@id/user_psw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/login_btn"

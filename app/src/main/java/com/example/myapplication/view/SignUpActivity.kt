@@ -18,7 +18,19 @@ class SignUpActivity : AppCompatActivity(){
         auth = Firebase.auth //파이어 베이스 할당
 
         binding.loginBtn.setOnClickListener{
-            createAccount(binding.userId.text.toString(), binding.userPsw.text.toString()) //계정 생성 함수
+            if(binding.userPsw.text.toString() == binding.userPswCheck.text.toString()) {
+                createAccount(
+                    binding.userId.text.toString(),
+                    binding.userPsw.text.toString()
+                ) //계정 생성 함수
+            }
+            else
+            {
+                Toast.makeText(
+                    this, "비밀번호가 다릅니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
         }
     }
     private fun createAccount(email: String, password: String) {

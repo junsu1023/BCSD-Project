@@ -4,7 +4,7 @@
     <string name="equipment_manage">비품 관리</string>
     <string name="search">검색</string>
     <string name="rental">대여</string>
-    <string name="update">업데이트</string>
+    <string name="update">갱신</string>
     <string name="delete">삭제</string>
     <string name="back">뒤로가기</string>
     <string name="title_or_content">제목 혹은 내용</string>
@@ -15,4 +15,5 @@
     <string name="add">추가</string>
     <string name="possible_rental">대여 가능</string>
     <string name="impossible_rental">대여 불가능</string>
+    <string name="equipment">비품</string>
 </resources>

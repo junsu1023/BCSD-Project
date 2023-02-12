@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="rental_activity"
+            type="com.example.myapplication.ui.RentalActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +20,7 @@
             android:layout_marginTop="50dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/no_image"
+            android:src="@drawable/add_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

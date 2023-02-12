@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="update_activity"
+            type="com.example.myapplication.ui.UpdateActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -18,7 +20,8 @@
             android:layout_marginTop="50dp"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/no_image"
+            android:background="@drawable/border_line_view"
+            android:src="@drawable/add_photo"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -72,7 +75,7 @@
             app:layout_constraintTop_toBottomOf="@id/edit_total_num_text_view"/>
 
         <Button
-            android:id="@+id/add_item_button"
+            android:id="@+id/edit_add_item_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/add"

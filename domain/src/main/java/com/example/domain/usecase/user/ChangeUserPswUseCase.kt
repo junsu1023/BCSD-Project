@@ -6,5 +6,5 @@ import javax.inject.Inject
 class ChangeUserPswUseCase  @Inject constructor(
     private val userDataRepository: UserDataRepository
 ) {
-    suspend operator fun invoke(uid: String) = userDataRepository.changeUserPws(uid)
+    operator fun invoke(uid: String, email: String,name: String, new_password: String, new_password_check: String) = userDataRepository.changeUserPsw(uid, email, name, new_password, new_password_check)
 }

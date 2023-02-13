@@ -3,8 +3,8 @@ package com.example.domain.usecase.user
 import com.example.domain.repository.UserDataRepository
 import javax.inject.Inject
 
-class SignInWithEmail @Inject constructor(
+class SignInWithEmailUseCase @Inject constructor(
     private val userDataRepository: UserDataRepository
 ) {
-    suspend operator fun invoke(email: String, psw: String) = userDataRepository.signInWithEmail(email, psw)
+    operator fun invoke(email: String, psw: String) = userDataRepository.signInWithEmail(email, psw)
 }

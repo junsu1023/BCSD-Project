@@ -7,7 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.domain.data.user.UserInfo
+import com.example.data.entity.UserInfoEntity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.UserPageActivityBinding
 
@@ -32,7 +32,7 @@ class UserPageActivity  : AppCompatActivity() {
         //데이터 베이스 경로 저장
         databaseReference.child(intent.getStringExtra("uid").toString()).addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val group: UserInfo? = snapshot.getValue(UserInfo::class.java)
+                val group: UserInfoEntity? = snapshot.getValue(UserInfoEntity::class.java)
                 userName = group?.name.toString()
                 curPsw = group?.password.toString()
                 userEmail = group?.emailId.toString()

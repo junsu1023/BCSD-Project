@@ -30,7 +30,6 @@ class SignInActivity : AppCompatActivity(){
     }
 
     private fun signInWithEmail(email: String, password: String) {
-
         if (email.isNotEmpty() && password.isNotEmpty()) {
             auth?.signInWithEmailAndPassword(email, password)
                 ?.addOnCompleteListener(this) { task ->

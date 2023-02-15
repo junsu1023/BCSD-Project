@@ -10,21 +10,13 @@ import com.google.firebase.ktx.Firebase
 
 interface WarehouseRepository {
 
-    suspend fun updateItemAmount(
-        name: String,
-        image: Bitmap?,
-        totalItem: Int,
-        currentItem: Int,
-        rentalState: Boolean
-    )
-
     suspend fun deleteItem(name: String)
 
     suspend fun getItem(name: String): List<WarehouseEntity>
 
     suspend fun addItem(
         name: String,
-        image: Bitmap?,
+        rentalUser : String,
         totalItem: Int,
         currentItem: Int,
         rentalState: Boolean

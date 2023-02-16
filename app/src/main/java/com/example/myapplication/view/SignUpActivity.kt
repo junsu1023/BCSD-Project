@@ -3,7 +3,7 @@ package com.example.myapplication.view
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.domain.data.user.UserInfo
+import com.example.domain.data.user.User
 import com.example.myapplication.databinding.SignUpActivityBinding
 
 class SignUpActivity : AppCompatActivity(){
@@ -11,7 +11,7 @@ class SignUpActivity : AppCompatActivity(){
     // 파이어베이스 인증을 위한 객체
     private var auth : FirebaseAuth? = null
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var userInfo: UserInfo
+    private lateinit var userInfo: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -60,7 +60,7 @@ class SignUpActivity : AppCompatActivity(){
                         }*/
                         val firebaseUser = FirebaseAuth.getInstance().currentUser
 
-                        userInfo = UserInfo(
+                        userInfo = User(
                             idToken = firebaseUser?.uid.toString(),
                             emailId = firebaseUser?.email.toString(),
                             password = password,

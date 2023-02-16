@@ -7,7 +7,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.domain.data.user.UserInfo
+import com.example.domain.data.user.User
 import com.example.myapplication.R
 import com.example.myapplication.databinding.UserPageActivityBinding
 
@@ -32,7 +32,7 @@ class UserPageActivity  : AppCompatActivity() {
         //데이터 베이스 경로 저장
         databaseReference.child(intent.getStringExtra("uid").toString()).addValueEventListener(object: ValueEventListener{
             override fun onDataChange(snapshot: DataSnapshot) {
-                val group: UserInfo? = snapshot.getValue(UserInfo::class.java)
+                val group: User? = snapshot.getValue(User::class.java)
                 userName = group?.name.toString()
                 curPsw = group?.password.toString()
                 userEmail = group?.emailId.toString()
@@ -87,7 +87,7 @@ class UserPageActivity  : AppCompatActivity() {
             auth?.currentUser?.updatePassword(new_password)
                 ?.addOnCompleteListener(this) { task ->
                     if (task.isSuccessful) {
-                        var userInfo: UserInfo = UserInfo(
+                        var userInfo: User = User(
                             idToken = intent.getStringExtra("uid").toString(),
                             emailId = userEmail,
                             password = new_password,

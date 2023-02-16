@@ -6,15 +6,15 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityMainBinding
+import com.example.myapplication.databinding.ActivitySelectButtonBinding
 
-class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+class SelectButtonActivity : AppCompatActivity() {
+    private lateinit var binding: ActivitySelectButtonBinding
     private lateinit var changeActivity: Intent
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_main)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_select_button)
 
         val mainRentalButton: Button = binding.mainRentalButton
         val mainUpdateButton: Button = binding.mainUpdateButton

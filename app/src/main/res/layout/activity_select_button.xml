@@ -6,13 +6,13 @@
     <data>
         <variable
             name="main_activity"
-            type="com.example.myapplication.ui.MainActivity"/>
+            type="com.example.myapplication.ui.SelectButtonActivity"/>
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.MainActivity">
+        tools:context=".ui.SelectButtonActivity">
 
         <TextView
             android:id="@+id/equipment_text"

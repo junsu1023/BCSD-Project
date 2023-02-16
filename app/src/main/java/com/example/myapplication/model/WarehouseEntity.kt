@@ -6,7 +6,8 @@ data class WarehouseEntity(
     var totalItem: Int,
     var currentItem: Int,
     var rentalState: Boolean
-){
+)
+{
     fun toMap(): HashMap<String, Any?> {
         return hashMapOf(
             "rentalUser" to rentalUser,

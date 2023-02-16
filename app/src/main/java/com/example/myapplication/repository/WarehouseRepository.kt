@@ -1,17 +1,17 @@
 package com.example.myapplication.repository
 
+import com.example.myapplication.model.ResponseEntity
 import com.example.myapplication.model.WarehouseEntity
-import com.google.android.gms.common.api.Response
 import kotlinx.coroutines.flow.Flow
 
-typealias Items = List<WarehouseEntity>
-typealias ItemsResponse = Response<Items>
+typealias Items = MutableList<WarehouseEntity>
+typealias ItemsResponse = ResponseEntity<Items>
 
 interface WarehouseRepository {
 
     suspend fun deleteItem(name: String)
 
-    fun getItem(): Flow<Response>
+    fun getItem(): Flow<ItemsResponse>
 
     suspend fun addItem(
         name: String,

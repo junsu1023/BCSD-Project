@@ -1,9 +1,14 @@
-package com.example.myapplication
+package com.example.myapplication.data
 
 import android.content.ContentValues.TAG
 import android.util.Log
+import com.example.myapplication.model.ResponseEntity
+import com.example.myapplication.model.WarehouseEntity
+import com.example.myapplication.repository.WarehouseRepository
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import kotlinx.coroutines.channels.awaitClose
+import kotlinx.coroutines.flow.callbackFlow
 
 class WarehouseRepositoryImpl(): WarehouseRepository {
     private val database = Firebase.firestore
@@ -28,20 +33,19 @@ class WarehouseRepositoryImpl(): WarehouseRepository {
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
-    override suspend fun getItem(name: String): List<WarehouseEntity> {
-        val itemRef = database.collection("item").document(name)
-        var itemData : List<WarehouseEntity>
-        itemRef.get()
-            .addOnSuccessListener { document ->
-                if (document != null) {
-                    Log.d(TAG, "Cached document data: ${document?.data}")
-                } else {
-                    Log.d(TAG, "No such document")
-                }
+    override fun getItem() = callbackFlow {
+        val itemRef = database.collection("item").addSnapshotListener { snapshot, e ->
+            val itemResponse = if (snapshot != null){
+                val items = snapshot.toObjects(WarehouseEntity::class.java)
+                ResponseEntity.Success(items)
+            } else {
+                ResponseEntity.Failure(e)
             }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "get failed with ", exception)
-            }
+            trySend(itemResponse)
+        }
+        awaitClose {
+            itemRef.remove()
+        }
     }
 
 

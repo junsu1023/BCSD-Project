@@ -5,7 +5,7 @@
     <data>
         <variable
             name="search_activity"
-            type="com.example.myapplication.ui.SearchActivity" />
+            type="com.example.myapplication.view.SearchActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

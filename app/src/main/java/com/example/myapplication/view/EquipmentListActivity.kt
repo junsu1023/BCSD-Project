@@ -1,17 +1,17 @@
-package com.example.myapplication.ui
+package com.example.myapplication.view
 
 import android.os.Bundle
 import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.R
-import com.example.myapplication.databinding.ActivityRentalEquipmentBinding
+import com.example.myapplication.databinding.ActivityEquipmentListBinding
 
-class RentalActivity: AppCompatActivity() {
-    private lateinit var binding: ActivityRentalEquipmentBinding
+class EquipmentListActivity: AppCompatActivity() {
+    private lateinit var binding: ActivityEquipmentListBinding
 
     override fun onCreate(savedInstanceState: Bundle?, persistentState: PersistableBundle?) {
         super.onCreate(savedInstanceState, persistentState)
-        binding = DataBindingUtil.setContentView(this, R.layout.activity_rental_equipment)
+        binding = DataBindingUtil.setContentView(this, R.layout.activity_equipment_list)
     }
 }

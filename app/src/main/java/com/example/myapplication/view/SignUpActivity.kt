@@ -5,6 +5,11 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.domain.data.user.User
 import com.example.myapplication.databinding.SignUpActivityBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.ktx.Firebase
 
 class SignUpActivity : AppCompatActivity(){
     private lateinit var binding: SignUpActivityBinding //바인딩할 xml 이름으로 수정
@@ -15,7 +20,7 @@ class SignUpActivity : AppCompatActivity(){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = CreateAccountBinding.inflate(layoutInflater)
+        binding = SignUpActivityBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
 

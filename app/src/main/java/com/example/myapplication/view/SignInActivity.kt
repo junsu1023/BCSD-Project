@@ -5,6 +5,9 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.SignInActivityBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
 class SignInActivity : AppCompatActivity(){
     private lateinit var binding: SignInActivityBinding //바인딩할 xml 이름으로 수정

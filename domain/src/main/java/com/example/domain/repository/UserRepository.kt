@@ -2,6 +2,7 @@ package com.example.domain.repository
 
 import androidx.appcompat.app.AppCompatActivity
 import com.example.domain.data.user.User
+import com.google.firebase.auth.FirebaseUser
 
 interface UserRepository {
     fun signUpWithEmail(email: String, psw: String, name: String, activity: AppCompatActivity)

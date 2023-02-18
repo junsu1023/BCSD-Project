@@ -11,4 +11,6 @@ java {
 dependencies {
     implementation project(':domain')
     implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.6'
+    implementation 'com.google.firebase:firebase-database-ktx:20.0.5'
 }

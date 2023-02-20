@@ -10,6 +10,10 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.domain.data.user.User
 import com.example.myapplication.R
 import com.example.myapplication.databinding.UserPageActivityBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.*
+import com.google.firebase.ktx.Firebase
 
 class UserPageActivity  : AppCompatActivity() {
     private lateinit var binding: UserPageActivityBinding
@@ -30,7 +34,8 @@ class UserPageActivity  : AppCompatActivity() {
         auth = Firebase.auth //파이어 베이스 할당
         databaseReference = FirebaseDatabase.getInstance().getReference("User")
         //데이터 베이스 경로 저장
-        databaseReference.child(intent.getStringExtra("uid").toString()).addValueEventListener(object: ValueEventListener{
+        databaseReference.child(intent.getStringExtra("uid").toString()).addValueEventListener(object:
+            ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val group: User? = snapshot.getValue(User::class.java)
                 userName = group?.name.toString()
@@ -44,7 +49,7 @@ class UserPageActivity  : AppCompatActivity() {
             }
         } )
 
-        binding.logoutBtn.setOnClickListener{
+        binding.signOutBtn.setOnClickListener{
             val intent = Intent(this, SignInActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)

@@ -30,21 +30,21 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/login_btn"
+        android:id="@+id/sign_in_btn"
         android:text="@string/sign_in"
         app:layout_constraintTop_toBottomOf="@id/user_psw"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/signin_btn"/>
+        app:layout_constraintEnd_toStartOf="@id/sign_up_btn"/>
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/signin_btn"
+        android:id="@+id/sign_up_btn"
         android:text="@string/sign_up"
         app:layout_constraintTop_toBottomOf="@id/user_psw"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/login_btn"
+        app:layout_constraintStart_toEndOf="@id/sign_in_btn"
         app:layout_constraintEnd_toEndOf="parent"
         />
 </androidx.constraintlayout.widget.ConstraintLayout>

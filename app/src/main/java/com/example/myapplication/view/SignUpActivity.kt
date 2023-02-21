@@ -27,7 +27,7 @@ class SignUpActivity : AppCompatActivity(){
         auth = Firebase.auth //파이어 베이스 할당
         databaseReference = FirebaseDatabase.getInstance().getReference("User")
 
-        binding.loginBtn.setOnClickListener{
+        binding.createAccountBtn.setOnClickListener{
             if(binding.userPsw.text.toString() == binding.userPswCheck.text.toString()) {
                 createAccount(
                     binding.userId.text.toString(),

@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.myapplication.databinding.SignInActivityBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.ktx.Firebase
 
@@ -22,12 +23,12 @@ class SignInActivity : AppCompatActivity(){
 
         auth = Firebase.auth
 
-        binding.signInBtn.setOnClickListener{
+        binding.signUpBtn.setOnClickListener{
             val intent_main = Intent(this, SignInActivity::class.java)
             startActivity(intent_main)
         } // 회원가입 버튼
 
-        binding.loginBtn.setOnClickListener{
+        binding.signInBtn.setOnClickListener{
             signInWithEmail(binding.userId.text.toString(), binding.userPsw.text.toString())
         } // 로그인 버튼
     }

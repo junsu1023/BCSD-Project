@@ -49,7 +49,7 @@ class UserPageActivity  : AppCompatActivity() {
             }
         } )
 
-        binding.logoutBtn.setOnClickListener{
+        binding.signOutBtn.setOnClickListener{
             val intent = Intent(this, SignInActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)

@@ -1,4 +1,4 @@
-package com.example.myapplication.view
+package com.example.myapplication.activity
 
 import android.os.Bundle
 import android.widget.Toast

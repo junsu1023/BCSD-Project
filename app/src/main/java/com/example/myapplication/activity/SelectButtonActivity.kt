@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import androidx.databinding.DataBindingUtil
 import com.example.myapplication.R
+import com.example.myapplication.adapter.EquipmentListAdapter
 import com.example.myapplication.databinding.ActivitySelectButtonBinding
 
 class SelectButtonActivity : AppCompatActivity() {

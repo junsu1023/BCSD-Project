@@ -11,5 +11,5 @@ interface EquipmentDao {
     fun insertEquipmentData(equipmentData: EquipmentEntity)
 
     // @Delete()
-    fun deleteEquipmentData(equipmentData: EquipmentEntity)
+    fun deleteEquipmentData(position: Int)
 }

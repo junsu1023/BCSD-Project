@@ -10,7 +10,7 @@ import com.example.myapplication.R
 import com.example.myapplication.adapter.EquipmentListAdapter
 import com.example.myapplication.databinding.ActivityEquipmentListBinding
 import com.example.myapplication.viewmodel.EquipmentListViewModel
-import com.example.myapplication.viewmodel.ImageViewModel
+import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EquipmentListActivity: AppCompatActivity() {
     private lateinit var binding: ActivityEquipmentListBinding

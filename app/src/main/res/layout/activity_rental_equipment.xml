@@ -5,7 +5,7 @@
     <data>
         <variable
             name="rental_activity"
-            type="com.example.myapplication.view.RentalActivity" />
+            type="com.example.myapplication.activity.RentalActivity" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

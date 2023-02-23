@@ -19,20 +19,17 @@ class UserViewModel(
     private val signUpWithEmailUseCase: SignUpWithEmailUscCase
 ) : ViewModel(){
 
-    private val _toastMessage = MutableLiveData<String>() //sigleLiveDatas 넣어보기
-    val toastMessage: LiveData<String> get() = _toastMessage
-
-    private val _user = MutableLiveData<User>()
-    val user: LiveData<User> get() = _user
+    private val _finishCheck = MutableLiveData<Boolean>()
+    val finishCheck: LiveData<Boolean> get() = _finishCheck
 
     fun changePsw(user: User, new_password: String, new_password_check: String)
     {
         viewModelScope.launch {
             changeUserPswUseCase(user, new_password, new_password_check).collectLatest {
                 it.onSuccess {
-                    _toastMessage.value = "비밀번호가 변경되었습니다."
+                    _finishCheck.value = true
                 }.onFailure {
-                    _toastMessage.value = it.message
+                    _finishCheck.value = false
                 }
             }
         }
@@ -43,9 +40,9 @@ class UserViewModel(
         viewModelScope.launch {
             deleteUserUseCase(uid).collectLatest {
                 it.onSuccess {
-                    _toastMessage.value = "회원탈퇴가 완료되었습니다"
+                    _finishCheck.value = true
                 }.onFailure {
-                    _toastMessage.value = it.message
+                    _finishCheck.value = false
                 }
             }
         }
@@ -57,9 +54,9 @@ class UserViewModel(
         viewModelScope.launch {
             signInWithEmailUseCase(email, psw).collectLatest {
                 it.onSuccess {
-                    _toastMessage.value = "계정 생성 완료."
+                    _finishCheck.value = true
                 }.onFailure {
-                    _toastMessage.value = it.message
+                    _finishCheck.value = false
                 }
             }
         }
@@ -68,12 +65,11 @@ class UserViewModel(
     fun signUpEmail(email: String, psw: String, name: String)
     {
         viewModelScope.launch {
-            signUpWithEmailUseCase(email, psw, name).collectLatest {
-                it.onSuccess {
-                    _user.value = it
-                    _toastMessage.value = "로그인에 성공 하였습니다."
+            signUpWithEmailUseCase(email, psw, name).collectLatest { result ->
+                result.onSuccess {
+                    _finishCheck.value = true
                 }.onFailure {
-                    _toastMessage.value = it.message
+                    _finishCheck.value = false
                 }
             }
         }

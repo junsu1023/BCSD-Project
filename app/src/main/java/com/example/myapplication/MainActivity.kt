@@ -20,16 +20,5 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val items = WarehouseRepositoryImpl().getItem()
-
-        CoroutineScope(Dispatchers.Main).launch {
-            items.collectLatest {
-                it.onSuccess {
-
-                }.onFailure {
-
-                }
-            }
-        }
     }
 }

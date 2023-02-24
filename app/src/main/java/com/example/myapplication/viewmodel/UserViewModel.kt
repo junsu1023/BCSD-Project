@@ -1,38 +1,77 @@
 package com.example.myapplication.viewmodel
 
-import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.data.user.User
 import com.example.domain.usecase.user.ChangeUserPswUseCase
 import com.example.domain.usecase.user.DeleteUserUseCase
 import com.example.domain.usecase.user.SignInWithEmailUseCase
-import com.example.domain.usecase.user.SignUpWithEmailUseCase
-import com.google.firebase.auth.FirebaseUser
+import com.example.domain.usecase.user.SignUpWithEmailUscCase
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class UserViewModel(
     private val changeUserPswUseCase: ChangeUserPswUseCase,
     private val deleteUserUseCase: DeleteUserUseCase,
     private val signInWithEmailUseCase: SignInWithEmailUseCase,
-    private val signUpWithEmailUseCase: SignUpWithEmailUseCase
+    private val signUpWithEmailUseCase: SignUpWithEmailUscCase
 ) : ViewModel(){
 
-    fun changePsw(user: User, new_password: String, new_password_check: String, activity: AppCompatActivity)
+    private val _finishCheck = MutableLiveData<Boolean>()
+    val finishCheck: LiveData<Boolean> get() = _finishCheck
+
+    fun changePsw(user: User, new_password: String, new_password_check: String)
     {
-        changeUserPswUseCase(user, new_password, new_password_check, activity)
+        viewModelScope.launch {
+            changeUserPswUseCase(user, new_password, new_password_check).collectLatest {
+                it.onSuccess {
+                    _finishCheck.value = true
+                }.onFailure {
+                    _finishCheck.value = false
+                }
+            }
+        }
     }
 
-    fun deleteUser(uid: String, activity: AppCompatActivity)
+    fun deleteUser(uid: String)
     {
-        deleteUserUseCase(uid, activity)
+        viewModelScope.launch {
+            deleteUserUseCase(uid).collectLatest {
+                it.onSuccess {
+                    _finishCheck.value = true
+                }.onFailure {
+                    _finishCheck.value = false
+                }
+            }
+        }
+
     }
 
-    fun signInEmail(email: String, psw: String, activity: AppCompatActivity): FirebaseUser?
+    fun signInEmail(email: String, psw: String)
     {
-        return signInWithEmailUseCase(email, psw, activity)
+        viewModelScope.launch {
+            signInWithEmailUseCase(email, psw).collectLatest {
+                it.onSuccess {
+                    _finishCheck.value = true
+                }.onFailure {
+                    _finishCheck.value = false
+                }
+            }
+        }
     }
 
-    fun signUpEmail(email: String, psw: String, name: String, activity: AppCompatActivity)
+    fun signUpEmail(email: String, psw: String, name: String)
     {
-        signUpWithEmailUseCase(email, psw, name, activity)
+        viewModelScope.launch {
+            signUpWithEmailUseCase(email, psw, name).collectLatest { result ->
+                result.onSuccess {
+                    _finishCheck.value = true
+                }.onFailure {
+                    _finishCheck.value = false
+                }
+            }
+        }
     }
 }

@@ -40,7 +40,7 @@ class SignInActivity : AppCompatActivity(){
                         baseContext, "로그인에 성공 하였습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    val intent = Intent(this, UserPageActivity::class.java)
+                    val intent = Intent(this, SelectButtonActivity::class.java)
                     intent.putExtra("uid", auth?.currentUser?.uid)
                     startActivity(intent)
                     finish()

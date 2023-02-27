@@ -4,6 +4,7 @@
     <string name="equipment_manage">비품 관리</string>
     <string name="search">검색</string>
     <string name="rental">대여</string>
+    <string name="user">내 정보</string>
     <string name="update">업데이트</string>
     <string name="delete">삭제</string>
     <string name="back">뒤로가기</string>
@@ -15,7 +16,7 @@
     <string name="add">추가</string>
     <string name="possible_rental">대여 가능</string>
     <string name="impossible_rental">대여 불가능</string>
-    <string name="want_email">사용하실 아이디</string>
+    <string name="want_email">사용하실 아이디(이메일)</string>
     <string name="want_psw">사용하실 비밀번호</string>
     <string name="want_psw_check">사용하실 비밀번호 재확인</string>
     <string name="input_email">아이디</string>

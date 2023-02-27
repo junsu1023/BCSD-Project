@@ -35,7 +35,7 @@ class SelectButtonActivity : AppCompatActivity() {
     }
 
     private fun onMainRentalButtonClick() {
-        changeActivity = Intent(this, SignInActivity::class.java)
+        changeActivity = Intent(this, EquipmentListActivity::class.java)
         startActivity(changeActivity)
     }
 

@@ -5,10 +5,10 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <EditText
-        android:id="@+id/user_id"
+        android:id="@+id/user_name"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:hint="@string/input_email"
+        android:hint="@string/name"
         android:minHeight="48dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,34 +17,45 @@
         app:layout_constraintVertical_bias="0.3" />
 
     <EditText
+        android:id="@+id/user_id"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/want_email"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/user_name" />
+
+    <EditText
         android:id="@+id/user_psw"
         android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:hint="@string/input_psw"
+        android:hint="@string/want_psw"
         android:inputType="textPassword"
         android:minHeight="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/user_id" />
 
-    <Button
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/user_psw_check"
+        android:layout_width="250dp"
         android:layout_height="wrap_content"
-        android:id="@+id/sign_in_btn"
-        android:text="@string/sign_in"
-        app:layout_constraintTop_toBottomOf="@id/user_psw"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:hint="@string/want_psw_check"
+        android:inputType="textPassword"
+        android:minHeight="48dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/sign_up_btn"/>
+        app:layout_constraintTop_toBottomOf="@id/user_psw" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/sign_up_btn"
-        android:text="@string/sign_up"
-        app:layout_constraintTop_toBottomOf="@id/user_psw"
+        android:id="@+id/create_account_btn"
+        android:text="@string/make_user"
+        app:layout_constraintTop_toBottomOf="@id/user_psw_check"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/sign_in_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

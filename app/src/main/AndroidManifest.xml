@@ -37,8 +37,25 @@
             android:exported="true">
 
         </activity>
+
         <activity
             android:name=".activity.SelectButtonActivity"
+            android:exported="true">
+        </activity>
+
+
+        <activity
+            android:name=".activity.SignUpActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".activity.UserPageActivity"
+            android:exported="true">
+        </activity>
+
+        <activity
+            android:name=".activity.SignInActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

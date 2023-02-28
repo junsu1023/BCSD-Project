@@ -22,10 +22,10 @@ class UserViewModel(
     private val _finishCheck = MutableLiveData<Boolean>()
     val finishCheck: LiveData<Boolean> get() = _finishCheck
 
-    fun changePsw(user: User, new_password: String, new_password_check: String)
+    fun changePsw(user: User, new_password: String)
     {
         viewModelScope.launch {
-            changeUserPswUseCase(user, new_password, new_password_check).collectLatest {
+            changeUserPswUseCase(user, new_password).collectLatest {
                 it.onSuccess {
                     _finishCheck.value = true
                 }.onFailure {

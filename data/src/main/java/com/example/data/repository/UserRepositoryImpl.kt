@@ -56,9 +56,7 @@ class UserRepositoryImpl() :UserRepository{
         awaitClose()
     }
 
-    override fun changeUserPsw(user: User, new_password: String, new_password_check: String): Flow<Result<Unit>> = callbackFlow {
-        if(new_password == new_password_check)
-        {
+    override fun changeUserPsw(user: User, new_password: String): Flow<Result<Unit>> = callbackFlow {
             auth?.currentUser?.updatePassword(new_password)
                 ?.addOnCompleteListener { task ->
                     if (task.isSuccessful) {
@@ -71,11 +69,10 @@ class UserRepositoryImpl() :UserRepository{
                         databaseReference.child(user.idToken).setValue(user)
                         trySend(Result.success(Unit))
                     }
+                    else{
+                        trySend(Result.failure(RuntimeException("변경 실패!")))
+                    }
                 }
-        }
-        else{
-            trySend(Result.failure(RuntimeException("비밀번호 변경 실패!")))
-        }
         awaitClose()
     }
 

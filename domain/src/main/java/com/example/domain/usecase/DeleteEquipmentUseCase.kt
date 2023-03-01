@@ -4,7 +4,7 @@ import com.example.domain.model.EquipmentData
 import com.example.domain.repository.EquipmentRepository
 
 class DeleteEquipmentUseCase(private val equipmentRepository: EquipmentRepository) {
-    operator fun invoke(position: Int) {
-        equipmentRepository.deleteEquipmentData(position)
+    operator fun invoke(equipmentData: EquipmentData) {
+        equipmentRepository.deleteEquipmentData(equipmentData)
     }
 }

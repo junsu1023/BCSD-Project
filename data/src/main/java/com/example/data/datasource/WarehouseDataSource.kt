@@ -1,28 +1,28 @@
-package com.example.data.repository
+package com.example.data.datasource
 
 import android.content.ContentValues.TAG
 import android.util.Log
 import com.example.data.mapper.mapToData
 import com.example.data.model.EquipmentEntity
-import com.example.data.model.ResponseEntity
-import com.example.domain.repository.WarehouseRepository
+import com.example.domain.model.EquipmentData
+import com.example.domain.model.ResponseData
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 
-class WarehouseRepositoryImpl(): WarehouseRepository {
+class WarehouseDataSource() {
     private val database = Firebase.firestore
 
-    override suspend fun deleteItem(name: String) {
+    fun deleteItem(name: String) {
         database.collection("Equipment").document(name)
             .delete()
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 
-    override suspend fun addItem(
-        albumUri: String,
+    fun addItem(
+        albumUri: String?,
         name : String,
         totalCnt: Int,
         currentCnt: Int) {
@@ -34,13 +34,13 @@ class WarehouseRepositoryImpl(): WarehouseRepository {
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
-    override fun getItem() = callbackFlow {
+    fun getItem() = callbackFlow {
         val itemRef = database.collection("Equipment").addSnapshotListener { snapshot, e ->
             val itemResponse = if (snapshot != null){
-                val items = snapshot.toObjects(EquipmentEntity::class.java)
-                ResponseEntity.Success(items)
+                val items = snapshot.toObjects(EquipmentData::class.java)
+                ResponseData.Success(items)
             } else {
-                ResponseEntity.Failure(e)
+                ResponseData.Failure(e)
             }
             trySend(itemResponse)
         }

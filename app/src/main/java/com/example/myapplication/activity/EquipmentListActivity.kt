@@ -26,17 +26,17 @@ class EquipmentListActivity: AppCompatActivity() {
 
         val searchWord = intent.getStringExtra("searchWord")
         val borrowCnt = intent.getIntExtra("borrowCnt", -1)
+        val itemName = intent.getStringExtra("itemName")
+        if(!itemName.isNullOrEmpty()) {
+
+        }
+
+        val equipmentListAdapter = EquipmentListAdapter()
 
         val recyclerEquipmentList = mutableListOf<EquipmentData>()
         equipmentListViewModel.equipmentList.observe(this, Observer { equipmentList ->
-            for(equipment in equipmentList) {
-                if(equipment.name == searchWord) {
-                    recyclerEquipmentList.add(equipment)
-                }
-            }
+            equipmentListAdapter.setData(equipmentList)
         })
-
-        val equipmentListAdapter = EquipmentListAdapter(recyclerEquipmentList)
 
         val dividerItemDecoration = DividerItemDecoration(
             this,

@@ -1,17 +1,15 @@
 package com.example.myapplication.adapter
 
-import android.content.Intent
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.EquipmentData
-import com.example.myapplication.activity.RentalActivity
 import com.example.myapplication.databinding.EquipmentItemBinding
 
-class EquipmentListAdapter(equipmentList: MutableList<EquipmentData>): RecyclerView.Adapter<EquipmentListAdapter.ViewHolder>() {
+class EquipmentListAdapter(): RecyclerView.Adapter<EquipmentListAdapter.ViewHolder>() {
     lateinit var onClickListener: OnClickListener
     lateinit var onLongClickListener: OnLongClickListener
-    private val equipmentItem = equipmentList
+    private var equipmentItem = listOf<EquipmentData>()
 
     class ViewHolder(private val binding: EquipmentItemBinding): RecyclerView.ViewHolder(binding.root) {
         fun bind(equipmentItem: EquipmentData) {
@@ -28,6 +26,11 @@ class EquipmentListAdapter(equipmentList: MutableList<EquipmentData>): RecyclerV
     = holder.bind(equipmentItem[position])
 
     override fun getItemCount(): Int = equipmentItem.size
+
+    fun setData(equipmentList: List<EquipmentData>) {
+        equipmentItem = equipmentList
+        notifyDataSetChanged()
+    }
 
     interface OnClickListener {
         fun onClick(position: Int)

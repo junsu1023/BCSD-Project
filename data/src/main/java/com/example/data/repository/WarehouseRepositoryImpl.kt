@@ -1,44 +1,43 @@
-package com.example.myapplication.data
+package com.example.data.repository
 
 import android.content.ContentValues.TAG
 import android.util.Log
-import com.example.myapplication.model.ResponseEntity
-import com.example.myapplication.model.WarehouseEntity
-import com.example.myapplication.repository.ItemsResponse
-import com.example.myapplication.repository.WarehouseRepository
+import com.example.data.mapper.mapToData
+import com.example.data.model.EquipmentEntity
+import com.example.data.model.ResponseEntity
+import com.example.domain.repository.WarehouseRepository
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
-import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.callbackFlow
 
 class WarehouseRepositoryImpl(): WarehouseRepository {
     private val database = Firebase.firestore
 
     override suspend fun deleteItem(name: String) {
-        database.collection("item").document(name)
+        database.collection("Equipment").document(name)
             .delete()
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 
     override suspend fun addItem(
-        name: String,
-        rentalUser : String,
-        totalItem: Int,
-        currentItem: Int,
-        rentalState: Boolean) {
-        val item = WarehouseEntity(name, rentalUser, totalItem, currentItem, rentalState)
-        database.collection("item").document(name)
-            .set(item.toMap())
+        albumUri: String,
+        name : String,
+        totalCnt: Int,
+        currentCnt: Int) {
+        val item =
+            EquipmentEntity(albumUri, name, totalCnt, currentCnt)
+        database.collection("Equipment").document(name)
+            .set(item.mapToData())
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
     override fun getItem() = callbackFlow {
-        val itemRef = database.collection("item").addSnapshotListener { snapshot, e ->
+        val itemRef = database.collection("Equipment").addSnapshotListener { snapshot, e ->
             val itemResponse = if (snapshot != null){
-                val items = snapshot.toObjects(WarehouseEntity::class.java)
+                val items = snapshot.toObjects(EquipmentEntity::class.java)
                 ResponseEntity.Success(items)
             } else {
                 ResponseEntity.Failure(e)

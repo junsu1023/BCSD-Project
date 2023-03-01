@@ -4,8 +4,10 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.domain.model.EquipmentData
 import com.example.myapplication.R
 import com.example.myapplication.adapter.EquipmentListAdapter
 import com.example.myapplication.databinding.ActivityEquipmentListBinding
@@ -14,12 +16,27 @@ import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class EquipmentListActivity: AppCompatActivity() {
     private lateinit var binding: ActivityEquipmentListBinding
-    private val equipmentListAdapter = EquipmentListAdapter()
     private val equipmentListViewModel: EquipmentListViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_equipment_list)
+
+        binding.lifecycleOwner = this
+
+        val searchWord = intent.getStringExtra("searchWord")
+        val borrowCnt = intent.getIntExtra("borrowCnt", -1)
+
+        val recyclerEquipmentList = mutableListOf<EquipmentData>()
+        equipmentListViewModel.equipmentList.observe(this, Observer { equipmentList ->
+            for(equipment in equipmentList) {
+                if(equipment.name == searchWord) {
+                    recyclerEquipmentList.add(equipment)
+                }
+            }
+        })
+
+        val equipmentListAdapter = EquipmentListAdapter(recyclerEquipmentList)
 
         val dividerItemDecoration = DividerItemDecoration(
             this,

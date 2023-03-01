@@ -27,17 +27,4 @@ class RentalViewModel(
             getEquipmentUseCase(position)
         }
     }
-
-    fun setImageUri(newImageUri: String?) {
-        equipmentData = equipmentData.copy(albumUri = newImageUri)
-        _equipment.value = equipmentData
-    }
-
-    fun insertEquipmentData(equipmentData: EquipmentData) {
-        insertEquipmentUseCase(equipmentData)
-    }
-
-    fun getEquipmentData(position: Int) {
-        getEquipmentUseCase(position)
-    }
 }

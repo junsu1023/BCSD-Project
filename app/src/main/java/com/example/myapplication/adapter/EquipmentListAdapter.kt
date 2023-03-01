@@ -8,20 +8,14 @@ import com.example.domain.model.EquipmentData
 import com.example.myapplication.activity.RentalActivity
 import com.example.myapplication.databinding.EquipmentItemBinding
 
-class EquipmentListAdapter: RecyclerView.Adapter<EquipmentListAdapter.ViewHolder>() {
+class EquipmentListAdapter(equipmentList: MutableList<EquipmentData>): RecyclerView.Adapter<EquipmentListAdapter.ViewHolder>() {
     lateinit var onClickListener: OnClickListener
     lateinit var onLongClickListener: OnLongClickListener
-    private val equipmentItem = mutableListOf<EquipmentData>()
+    private val equipmentItem = equipmentList
 
     class ViewHolder(private val binding: EquipmentItemBinding): RecyclerView.ViewHolder(binding.root) {
-        fun bind(equipmentItem: EquipmentData, position: Int) {
+        fun bind(equipmentItem: EquipmentData) {
             binding.equipment = equipmentItem
-
-            binding.equipmentItemLayout.setOnClickListener {
-                val intent = Intent(binding.root.context, RentalActivity::class.java)
-                intent.putExtra("position", position)
-                binding.root.context.startActivity(intent)
-            }
         }
     }
 
@@ -31,7 +25,7 @@ class EquipmentListAdapter: RecyclerView.Adapter<EquipmentListAdapter.ViewHolder
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int)
-    = holder.bind(equipmentItem[position], position)
+    = holder.bind(equipmentItem[position])
 
     override fun getItemCount(): Int = equipmentItem.size
 

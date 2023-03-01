@@ -6,6 +6,10 @@
         <variable
             name="update_activity"
             type="com.example.myapplication.activity.UpdateActivity" />
+
+        <variable
+            name="image_view_model"
+            type="com.example.myapplication.viewmodel.ImageViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

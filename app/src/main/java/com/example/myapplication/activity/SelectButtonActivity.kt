@@ -20,6 +20,7 @@ class SelectButtonActivity : AppCompatActivity() {
         val mainRentalButton: Button = binding.mainRentalButton
         val mainUpdateButton: Button = binding.mainUpdateButton
         val mainSearchButton: Button = binding.mainSearchButton
+        val mainUserButton: Button = binding.mainUserButton
 
         mainRentalButton.setOnClickListener {
             onMainRentalButtonClick()
@@ -31,6 +32,9 @@ class SelectButtonActivity : AppCompatActivity() {
 
         mainSearchButton.setOnClickListener {
             onMainSearchButtonClick()
+        }
+        mainUserButton.setOnClickListener{
+            onMainUserButtonClick()
         }
     }
 
@@ -46,6 +50,12 @@ class SelectButtonActivity : AppCompatActivity() {
 
     private fun onMainSearchButtonClick() {
         changeActivity = Intent(this, SearchActivity::class.java)
+        startActivity(changeActivity)
+    }
+
+    private fun onMainUserButtonClick() {
+        changeActivity = Intent(this, UserPageActivity::class.java)
+        changeActivity.putExtra("uid", intent.getStringExtra("uid").toString())
         startActivity(changeActivity)
     }
 }

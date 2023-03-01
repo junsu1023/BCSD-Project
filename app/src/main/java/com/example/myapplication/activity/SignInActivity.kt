@@ -28,7 +28,7 @@ class SignInActivity : AppCompatActivity(){
         auth = Firebase.auth
 
         binding.signUpBtn.setOnClickListener{
-            val intent_main = Intent(this, SignInActivity::class.java)
+            val intent_main = Intent(this, SignUpActivity::class.java)
             startActivity(intent_main)
         } // 회원가입 버튼
 
@@ -40,7 +40,7 @@ class SignInActivity : AppCompatActivity(){
                         baseContext, "로그인에 성공 하였습니다.",
                         Toast.LENGTH_SHORT
                     ).show()
-                    val intent = Intent(this, UserPageActivity::class.java)
+                    val intent = Intent(this, SelectButtonActivity::class.java)
                     intent.putExtra("uid", auth?.currentUser?.uid)
                     startActivity(intent)
                     finish()

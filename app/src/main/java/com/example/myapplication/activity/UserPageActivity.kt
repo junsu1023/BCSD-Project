@@ -46,50 +46,49 @@ class UserPageActivity  : AppCompatActivity() {
                     password = group?.password.toString(),
                     name = group?.name.toString()
                 )
-                binding.welcomeMsg.text = user.name.toString() + "님 환영합니다!" // 로그인한 계정의 이름을 출력
+                binding.userNamePrint.text = user.name
+                binding.userEmailPrint.text = user.emailId
             }
 
             override fun onCancelled(error: DatabaseError) {
-                binding.welcomeMsg.text = "알수없음"
+                binding.userNamePrint.text = "None"
+                binding.userEmailPrint.text = "None"
             }
         } ) //여기는 사용자 정보를 가져오는 곳
 
         binding.signOutBtn.setOnClickListener{
-            val intent = Intent(this, MainActivity::class.java)
-            //로그아웃시 나올 액티비티로 바꿔야함
+            val intent = Intent(this, SignInActivity::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
             auth?.signOut()
         }
 
-        binding.changePswBtn.setOnClickListener{
-            val inflater = layoutInflater
-            val rootView = inflater.inflate(R.layout.change_psw_dialog, null)
-            val builder = AlertDialog.Builder(this)
-                .setTitle("비밀번호 변경")
-                .setView(rootView)
-                .setPositiveButton("예") { _, _ ->
-                    val chanePsw: TextView = rootView.findViewById(R.id.change_psw)
-                    val chanePswCheck: TextView = rootView.findViewById(R.id.change_psw_check)
-                    userViewModel.changePsw(user, chanePsw.text.toString(), chanePswCheck.text.toString())
-                    userViewModel.finishCheck.observe(this, Observer {
-                        if(it){
-                            Toast.makeText(
-                                baseContext, "비밀번호가 변경되었습니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                        else{
-                            Toast.makeText(
-                                baseContext, "입력된 비밀번호가 서로 다릅니다.",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    })
-                }
-                .setNegativeButton("취소") { _, _ -> null}
-                .show()
-        } //비밀번호 변경 버튼을 누르면 다이얼그램을 이용
+        binding.changePswBtn.setOnClickListener {
+            if (binding.userCurrentPasswordInit.text.toString() == user.password) {
+                userViewModel.changePsw(user, binding.userNewPasswordInit.text.toString())
+                userViewModel.finishCheck.observe(this, Observer {
+                    if (it) {
+                        Toast.makeText(
+                            baseContext, "비밀번호가 변경되었습니다.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        binding.userCurrentPasswordInit.text.clear()
+                        binding.userNewPasswordInit.text.clear()
+                    } else {
+                        Toast.makeText(
+                            baseContext, "비밀번호 변경을 실패하였습니다.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                })
+            }
+            else{
+                Toast.makeText(
+                    baseContext, "입력된 현재 비밀번호가 다릅니다.",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
 
         binding.deleteUser.setOnClickListener{
             val inflater = layoutInflater

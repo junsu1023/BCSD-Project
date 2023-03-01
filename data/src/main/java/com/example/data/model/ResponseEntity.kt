@@ -1,4 +1,4 @@
-package com.example.myapplication.model
+package com.example.data.model
 
 sealed class ResponseEntity<out T> {
     data class Success<out T>(
@@ -13,12 +13,12 @@ sealed class ResponseEntity<out T> {
 val <T> ResponseEntity<T>.isSuccess get() = this is ResponseEntity.Success<T>
 val <T> ResponseEntity<T>.isFailure get() = this is ResponseEntity.Success<T>
 
-inline fun <T> ResponseEntity<out T>.onSuccess(block: (T) -> Unit) : ResponseEntity<T>{
+inline fun <T> ResponseEntity<out T>.onSuccess(block: (T) -> Unit) : ResponseEntity<T> {
     if(this is ResponseEntity.Success<T>) block(this.data)
     return this
 }
 
-inline fun <T> ResponseEntity<out T>.onFailure(block: (T) -> Unit) : ResponseEntity<T>{
+inline fun <T> ResponseEntity<out T>.onFailure(block: (T) -> Unit) : ResponseEntity<T> {
     if(this is ResponseEntity.Success<T>) block(this.data)
     return this
 }

@@ -33,4 +33,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-database:16.1.0'
     implementation 'com.google.firebase:firebase-auth-ktx'
+
+    //파이어스토어
+    implementation 'com.google.firebase:firebase-firestore-ktx'
 }

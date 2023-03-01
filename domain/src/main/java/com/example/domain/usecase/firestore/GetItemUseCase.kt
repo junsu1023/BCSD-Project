@@ -1,9 +1,9 @@
 package com.example.domain.usecase.firestore
 
-import com.example.domain.repository.WarehouseRepository
+import com.example.domain.repository.EquipmentRepository
 
 class GetItemUseCase(
-    private val warehouseRepository : WarehouseRepository
+    private val equipmentRepository : EquipmentRepository
 ) {
-    operator fun invoke() = warehouseRepository.getItem()
+    operator fun invoke() = equipmentRepository.getEquipmentListData()
 }

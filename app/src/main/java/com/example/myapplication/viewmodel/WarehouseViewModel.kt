@@ -17,7 +17,7 @@ class WarehouseViewModel(
     init {
         getItem()
     }
-    
+
     private fun getItem() = viewModelScope.launch {
         getItemUseCase().collect()
     }
@@ -28,10 +28,10 @@ class WarehouseViewModel(
         totalCnt: Int,
         currentCnt: Int
     ) = viewModelScope.launch {
-
+        addItemUseCase(albumUri, name, totalCnt, currentCnt)
     }
 
-    fun deleteITem() = viewModelScope.launch {
-
+    fun deleteITem(name : String) = viewModelScope.launch {
+        deleteItemUseCase(name)
     }
 }

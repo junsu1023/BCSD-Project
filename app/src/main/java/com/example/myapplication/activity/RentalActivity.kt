@@ -23,14 +23,15 @@ class RentalActivity: AppCompatActivity() {
         binding.rentalActivity = this
         binding.lifecycleOwner = this
 
-        val borrowCnt = binding.borrowNumTextView.text
         binding.rentalButton.setOnClickListener {
-            if(borrowCnt.isBlank()) {
-                Toast.makeText(applicationContext, "대여 갯수를 입력하세요.", Toast.LENGTH_SHORT).show()
-            }
             val intent = Intent(this, EquipmentListActivity::class.java)
-            intent.putExtra("borrowCnt", binding.borrowNumTextView.text.toString().toInt())
+            intent.putExtra("borrowCnt", 1)
         }
+
+//        binding.deleteButton.setOnClickListener {
+//            val intent = Intent(this, EquipmentListActivity::class.java)
+//            intent.putExtra("itemName", rentalViewModel)
+//        }
 
         val intent = Intent(this, EquipmentListActivity::class.java)
         setResult(RESULT_OK, intent)

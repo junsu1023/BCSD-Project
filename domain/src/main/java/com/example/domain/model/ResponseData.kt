@@ -18,7 +18,7 @@ inline fun <T> ResponseData<out T>.onSuccess(block: (T) -> Unit) : ResponseData<
     return this
 }
 
-inline fun <T> ResponseData<out T>.onFailure(block: (T) -> Unit) : ResponseData<T> {
+inline fun <T> ResponseData<out T>.onFailure(block: (T) -> Error) : ResponseData<T> {
     if(this is ResponseData.Success<T>) block(this.data)
     return this
 }

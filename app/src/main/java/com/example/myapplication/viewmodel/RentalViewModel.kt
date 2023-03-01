@@ -4,7 +4,6 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.domain.model.EquipmentData
-import com.example.domain.usecase.DeleteEquipmentUseCase
 import com.example.domain.usecase.GetEquipmentUseCase
 import com.example.domain.usecase.InsertEquipmentUseCase
 

@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.EquipmentData
 import com.example.myapplication.databinding.EquipmentItemBinding
 
-class EquipmentListAdapter: RecyclerView.Adapter<EquipmentListAdapter.ViewHolder>() {
+class EquipmentListAdapter(): RecyclerView.Adapter<EquipmentListAdapter.ViewHolder>() {
     lateinit var onClickListener: OnClickListener
     lateinit var onLongClickListener: OnLongClickListener
     private var equipmentItem = listOf<EquipmentData>()

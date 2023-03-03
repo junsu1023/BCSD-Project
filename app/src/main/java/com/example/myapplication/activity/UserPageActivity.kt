@@ -12,6 +12,7 @@ import com.example.domain.data.user.User
 import com.example.myapplication.MainActivity
 import com.example.myapplication.R
 import com.example.myapplication.databinding.UserPageActivityBinding
+import com.example.myapplication.fragment.DeleteUserFragment
 import com.example.myapplication.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
@@ -23,7 +24,7 @@ class UserPageActivity  : AppCompatActivity() {
     private lateinit var binding: UserPageActivityBinding
     private var auth : FirebaseAuth? = null
     private lateinit var databaseReference: DatabaseReference
-    private lateinit var user: User
+    private lateinit var userdata: User
     private val userViewModel: UserViewModel by viewModel()
 
     @SuppressLint("MissingInflatedId")
@@ -40,19 +41,22 @@ class UserPageActivity  : AppCompatActivity() {
             ValueEventListener {
             override fun onDataChange(snapshot: DataSnapshot) {
                 val group: User? = snapshot.getValue(User::class.java)
-                user = User(
+                userdata = User(
                     idToken = group?.idToken.toString(),
                     emailId = group?.emailId.toString(),
                     password = group?.password.toString(),
                     name = group?.name.toString()
                 )
-                binding.userNamePrint.text = user.name
-                binding.userEmailPrint.text = user.emailId
+                binding.user = userdata
             }
 
             override fun onCancelled(error: DatabaseError) {
-                binding.userNamePrint.text = "None"
-                binding.userEmailPrint.text = "None"
+                binding.user = User(
+                    idToken = "Null",
+                    emailId = "Null",
+                    password = "Null",
+                    name = "Null"
+                )
             }
         } ) //여기는 사용자 정보를 가져오는 곳
 
@@ -64,8 +68,8 @@ class UserPageActivity  : AppCompatActivity() {
         }
 
         binding.changePswBtn.setOnClickListener {
-            if (binding.userCurrentPasswordInit.text.toString() == user.password) {
-                userViewModel.changePsw(user, binding.userNewPasswordInit.text.toString())
+            if (binding.userCurrentPasswordInit.text.toString() == userdata.password) {
+                userViewModel.changePsw(userdata, binding.userNewPasswordInit.text.toString())
                 userViewModel.finishCheck.observe(this, Observer {
                     if (it) {
                         Toast.makeText(
@@ -98,8 +102,8 @@ class UserPageActivity  : AppCompatActivity() {
                 .setView(rootView)
                 .setPositiveButton("예") { _, _ ->
                     val checkPsw: TextView = rootView.findViewById(R.id.delete_input_psw)
-                    if(user.password == checkPsw.text.toString()) {
-                        userViewModel.deleteUser(user.idToken)
+                    if(userdata.password == checkPsw.text.toString()) {
+                        userViewModel.deleteUser(userdata.idToken)
                         userViewModel.finishCheck.observe(this, Observer {
                             if(it){
                                 Toast.makeText(
@@ -127,6 +131,11 @@ class UserPageActivity  : AppCompatActivity() {
                 }
                 .setNegativeButton("취소") { _, _ -> null}
                 .show()
+
+            supportFragmentManager.beginTransaction().apply {
+                replace(R.id.container, DeleteUserFragment())
+                commit()
+            }
         }
     }
 }

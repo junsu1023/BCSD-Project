@@ -7,10 +7,7 @@ import com.example.domain.repository.EquipmentRepository
 import com.example.domain.repository.ImageRepository
 import com.example.domain.repository.UserRepository
 import com.example.domain.usecase.*
-import com.example.domain.usecase.user.ChangeUserPswUseCase
-import com.example.domain.usecase.user.DeleteUserUseCase
-import com.example.domain.usecase.user.SignInWithEmailUseCase
-import com.example.domain.usecase.user.SignUpWithEmailUscCase
+import com.example.domain.usecase.user.*
 import com.example.myapplication.activity.EquipmentListActivity
 import com.example.myapplication.viewmodel.ImageViewModel
 import com.example.myapplication.viewmodel.UserViewModel
@@ -30,6 +27,8 @@ val appModule = module {
     single { DeleteUserUseCase(get()) }
     single { SignUpWithEmailUscCase(get()) }
     single { SignInWithEmailUseCase(get()) }
+    single { GetUserDataUseCase(get()) }
+
     single { GetImageUriUseCase(get()) }
     single { GetImageUseCase(get()) }
     single { LoadImageUseCase(get()) }
@@ -39,7 +38,7 @@ val appModule = module {
 
 val viewModelModule = module {
     viewModel {
-        UserViewModel(get(), get(), get(), get())
+        UserViewModel(get(), get(), get(), get(), get())
     }
     viewModel {
         ImageViewModel(get(), get(), get())

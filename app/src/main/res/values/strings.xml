@@ -32,6 +32,7 @@
     <string name="current_password">현재 비밀번호</string>
     <string name="new_password">신규 비밀번호</string>
     <string name="new_password_check">신규 비밀번호 재확인</string>
-    <string name="certification_for_delete">본인확인을 위해 현재 비밀번호를 입력하시오</string>
+    <string name="certification_for_delete">Account를 영구적으로 삭제하기 전에 먼저 비밀번호를 입력해주세요.</string>
+    <string name="delete_title">본인 Account 확인</string>
     <string name="equipment">비품</string>
 </resources>

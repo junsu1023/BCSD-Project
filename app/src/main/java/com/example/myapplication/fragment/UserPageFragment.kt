@@ -44,7 +44,7 @@ class UserPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val userActivity = activity as UserPageActivity
-        var uid = "null"
+        lateinit var uid : String
 
         arguments?.let { //액티비티에서 값을 받으면 넣음
             uid = it.getString("uid", "11")
@@ -67,12 +67,13 @@ class UserPageFragment : Fragment() {
             }
 
             override fun onCancelled(error: DatabaseError) {
-                binding.user = User(
+                userdata = User(
                     idToken = "Null",
                     emailId = "Null",
                     password = "Null",
                     name = "Null"
                 )
+                binding.user = userdata
             }
         } ) //여기는 사용자 정보를 가져오는 곳
 

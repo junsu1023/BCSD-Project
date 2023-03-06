@@ -22,8 +22,17 @@ class EquipmentListAdapter(): RecyclerView.Adapter<EquipmentListAdapter.ViewHold
         return ViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: ViewHolder, position: Int)
-    = holder.bind(equipmentItem[position])
+    override fun onBindViewHolder(holder: ViewHolder, position: Int){
+        holder.itemView.setOnClickListener{
+            onClickListener.onClick(position)
+        }
+
+        holder.itemView.setOnLongClickListener{
+            onLongClickListener.onLongClick(position)
+            return@setOnLongClickListener true
+        }
+        return holder.bind(equipmentItem[position])
+    }
 
     override fun getItemCount(): Int = equipmentItem.size
 

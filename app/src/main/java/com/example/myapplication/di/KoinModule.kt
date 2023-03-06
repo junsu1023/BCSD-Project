@@ -14,6 +14,7 @@ import com.example.domain.usecase.user.SignInWithEmailUseCase
 import com.example.domain.usecase.user.SignUpWithEmailUscCase
 import com.example.myapplication.viewmodel.EquipmentListViewModel
 import com.example.myapplication.viewmodel.ImageViewModel
+import com.example.myapplication.viewmodel.RentalViewModel
 import com.example.myapplication.viewmodel.UserViewModel
 import org.koin.android.ext.koin.androidContext
 import org.koin.androidx.viewmodel.dsl.viewModel
@@ -37,8 +38,8 @@ val appModule = module {
     single { LoadImageUseCase(get()) }
     single { InsertEquipmentUseCase(get())}
     single { GetEquipmentDataListUseCase(get())}
-    single { GetEquipmentUseCase(get())}
     single { DeleteEquipmentUseCase(get())}
+    single { GetEquipmentDataUseCase(get())}
 }
 
 val viewModelModule = module {
@@ -50,6 +51,9 @@ val viewModelModule = module {
     }
     viewModel {
         EquipmentListViewModel(get(), get(), get())
+    }
+    viewModel{
+        RentalViewModel(get(),get(),get())
     }
 }
 

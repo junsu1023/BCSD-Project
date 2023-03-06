@@ -23,6 +23,7 @@ class WarehouseDataSource {
 
     fun addItem(equipmentData: EquipmentData) {
         val item = hashMapOf(
+            "name" to equipmentData.name,
             "albumUri" to equipmentData.albumUri,
             "totalCnt" to equipmentData.totalCnt,
             "currentCnt" to equipmentData.currentCnt

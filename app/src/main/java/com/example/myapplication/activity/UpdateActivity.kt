@@ -8,15 +8,18 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
+import com.example.domain.model.EquipmentData
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityUpdateItemBinding
 import com.example.myapplication.util.OpenSettings
+import com.example.myapplication.viewmodel.EquipmentListViewModel
 import com.example.myapplication.viewmodel.ImageViewModel
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class UpdateActivity: AppCompatActivity() {
     private lateinit var binding: ActivityUpdateItemBinding
     private val imageViewModel: ImageViewModel by viewModel()
+    private val equipmentListViewModel: EquipmentListViewModel by viewModel()
 
     private val requestPermission =
         registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
@@ -47,8 +50,15 @@ class UpdateActivity: AppCompatActivity() {
             else loadImage()
         }
 
-        binding.editAddItemButton.setOnClickListener {
 
+
+        binding.editAddItemButton.setOnClickListener {
+            val equipmentName = binding.editEquipmentNameTextView.text.toString()
+            val totalCnt = binding.editTotalNumTextView.text.toString().toInt()
+            val currentCnt = binding.editCurrentNumTextView.text.toString().toInt()
+            val intent = Intent(this, EquipmentListActivity::class.java)
+            equipmentListViewModel.insertEquipmentData(EquipmentData("mollu",equipmentName, totalCnt, currentCnt))
+            startActivity(intent)
         }
 
         binding.imageViewModel = imageViewModel

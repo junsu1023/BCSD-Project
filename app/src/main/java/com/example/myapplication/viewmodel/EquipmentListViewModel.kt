@@ -42,6 +42,11 @@ class EquipmentListViewModel (
         }
     }
 
+    fun insertEquipmentData(equipmentData: EquipmentData){
+        viewModelScope.launch {
+            insertEquipmentUseCase(equipmentData)
+        }
+    }
     fun searchEquipment(equipmentName: String) {
         val searchEquipmentList = list.filter { it.name == equipmentName }
         _equipmentList.value = searchEquipmentList

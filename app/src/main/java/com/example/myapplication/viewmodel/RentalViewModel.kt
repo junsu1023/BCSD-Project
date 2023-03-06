@@ -3,11 +3,17 @@ package com.example.myapplication.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.model.EquipmentData
+import com.example.domain.model.onSuccess
+import com.example.domain.usecase.GetEquipmentDataListUseCase
 import com.example.domain.usecase.GetEquipmentUseCase
 import com.example.domain.usecase.InsertEquipmentUseCase
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class RentalViewModel(
+    private val getEquipmentDataListUseCase: GetEquipmentDataListUseCase,
     private val getEquipmentUseCase: GetEquipmentUseCase,
     private val insertEquipmentUseCase: InsertEquipmentUseCase,
     ): ViewModel() {
@@ -23,7 +29,8 @@ class RentalViewModel(
             EquipmentData(null, "", 0, 0)
         }
         else {
-            getEquipmentUseCase(position)
+            EquipmentData(null, "", 0, 0)
         }
     }
+
 }

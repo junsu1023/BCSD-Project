@@ -8,4 +8,5 @@ interface EquipmentRepository {
     fun insertEquipmentData(equipmentData: EquipmentData)
     fun deleteEquipmentData(equipmentName : String)
     fun getEquipmentListData(): Flow<ResponseData<List<EquipmentData>>>
+    fun getEquipmentData(equipmentName: String) : Flow<ResponseData<MutableMap<String, Any>?>>
 }

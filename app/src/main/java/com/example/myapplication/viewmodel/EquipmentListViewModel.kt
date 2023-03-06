@@ -6,11 +6,11 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.model.EquipmentData
 import com.example.domain.model.onSuccess
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import com.example.domain.usecase.DeleteEquipmentUseCase
 import com.example.domain.usecase.GetEquipmentDataListUseCase
 import com.example.domain.usecase.InsertEquipmentUseCase
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 
 class EquipmentListViewModel (
     private val getEquipmentDataListUseCase: GetEquipmentDataListUseCase,

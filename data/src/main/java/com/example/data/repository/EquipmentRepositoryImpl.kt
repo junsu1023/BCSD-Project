@@ -18,7 +18,12 @@ class EquipmentRepositoryImpl(private val warehouseDataSource: WarehouseDataSour
     }
 
     override fun getEquipmentListData(): Flow<ResponseData<List<EquipmentData>>> {
-        val data = warehouseDataSource.getItem()
+        val data = warehouseDataSource.getItemList()
+        return data
+    }
+
+    override fun getEquipmentData(equipmentName: String) : Flow<ResponseData<MutableMap<String, Any>?>> {
+        val data = warehouseDataSource.getItem(equipmentName)
         return data
     }
 }

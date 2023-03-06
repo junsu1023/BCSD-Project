@@ -36,6 +36,7 @@ class EquipmentListActivity: AppCompatActivity() {
         val recyclerEquipmentList = mutableListOf<EquipmentData>()
         equipmentListViewModel.equipmentList.observe(this, Observer { equipmentList ->
             equipmentListAdapter.setData(equipmentList)
+            
         })
 
         val dividerItemDecoration = DividerItemDecoration(
@@ -57,7 +58,7 @@ class EquipmentListActivity: AppCompatActivity() {
         }
 
         equipmentListAdapter.setOnLongClickListener {
-            equipmentListViewModel.removeEquipmentData(it)
+            equipmentListViewModel.removeEquipmentData(recyclerEquipmentList[it].name)
         }
     }
 }

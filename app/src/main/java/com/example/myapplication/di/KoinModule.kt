@@ -26,6 +26,7 @@ val appModule = module {
     single<ImageRepository> { ImageRepositoryImpl(get()) }
     single<UserRepository> { UserRepositoryImpl() }
     single<EquipmentRepository> { EquipmentRepositoryImpl(get()) }
+    single {WarehouseDataSource()}
 
     single { ChangeUserPswUseCase(get()) }
     single { DeleteUserUseCase(get()) }
@@ -36,6 +37,8 @@ val appModule = module {
     single { LoadImageUseCase(get()) }
     single { InsertEquipmentUseCase(get())}
     single { GetEquipmentDataListUseCase(get())}
+    single { GetEquipmentUseCase(get())}
+    single { DeleteEquipmentUseCase(get())}
 }
 
 val viewModelModule = module {

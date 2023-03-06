@@ -11,7 +11,7 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.callbackFlow
 
-class WarehouseDataSource() {
+class WarehouseDataSource {
     private val database = Firebase.firestore
 
     fun deleteItem(name: String) {
@@ -33,10 +33,25 @@ class WarehouseDataSource() {
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }
 
-    fun getItem() = callbackFlow {
+    fun getItemList() = callbackFlow {
         val itemRef = database.collection("Equipment").addSnapshotListener { snapshot, e ->
             val itemResponse = if (snapshot != null){
                 val items = snapshot.toObjects(EquipmentData::class.java)
+                ResponseData.Success(items)
+            } else {
+                ResponseData.Failure(e)
+            }
+            trySend(itemResponse)
+        }
+        awaitClose {
+            itemRef.remove()
+        }
+    }
+
+    fun getItem(name: String) = callbackFlow {
+        val itemRef = database.collection("Equipment").document(name).addSnapshotListener { snapshot, e ->
+            val itemResponse = if (snapshot != null){
+                val items = snapshot.data
                 ResponseData.Success(items)
             } else {
                 ResponseData.Failure(e)

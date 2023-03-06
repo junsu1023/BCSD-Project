@@ -21,15 +21,14 @@ class WarehouseDataSource() {
             .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 
-    fun addItem(
-        albumUri: String?,
-        name : String,
-        totalCnt: Int,
-        currentCnt: Int) {
-        val item =
-            EquipmentEntity(albumUri, name, totalCnt, currentCnt)
-        database.collection("Equipment").document(name)
-            .set(item.mapToData())
+    fun addItem(equipmentData: EquipmentData) {
+        val item = hashMapOf(
+            "albumUri" to equipmentData.albumUri,
+            "totalCnt" to equipmentData.totalCnt,
+            "currentCnt" to equipmentData.currentCnt
+        )
+        database.collection("Equipment").document(equipmentData.name)
+            .set(item)
             .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully written!") }
             .addOnFailureListener { e -> Log.w(TAG, "Error writing document", e) }
     }

@@ -8,12 +8,14 @@ import com.example.domain.model.EquipmentData
 import com.example.domain.model.onSuccess
 import com.example.domain.usecase.DeleteEquipmentUseCase
 import com.example.domain.usecase.GetEquipmentDataListUseCase
+import com.example.domain.usecase.InsertEquipmentUseCase
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class EquipmentListViewModel (
     private val getEquipmentDataListUseCase: GetEquipmentDataListUseCase,
-    private val deleteEquipmentUseCase: DeleteEquipmentUseCase)
+    private val deleteEquipmentUseCase: DeleteEquipmentUseCase,
+    private val insertEquipmentUseCase: InsertEquipmentUseCase)
 : ViewModel(){
     private val _equipmentList = MutableLiveData<List<EquipmentData>>()
     val equipmentList: LiveData<List<EquipmentData>> get() = _equipmentList
@@ -23,8 +25,10 @@ class EquipmentListViewModel (
         getEquipmentDataList()
     }
 
-    fun removeEquipmentData(position: Int) {
-        deleteEquipmentUseCase(equipmentList.value!![position])
+    fun removeEquipmentData(name : String) {
+        viewModelScope.launch {
+            deleteEquipmentUseCase(name)
+        }
     }
 
     fun getEquipmentDataList() {

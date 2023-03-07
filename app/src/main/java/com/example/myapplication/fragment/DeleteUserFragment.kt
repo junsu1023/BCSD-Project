@@ -9,7 +9,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.example.myapplication.R
-import com.example.myapplication.activity.SignInActivity
+import com.example.myapplication.activity.SignInUpActivity
 import com.example.myapplication.activity.UserPageActivity
 import com.example.myapplication.databinding.DeleteUserFragmentBinding
 import com.example.myapplication.viewmodel.UserViewModel
@@ -56,7 +56,7 @@ class DeleteUserFragment : Fragment() {
                             activity, "회원탈퇴가 완료되었습니다",
                             Toast.LENGTH_SHORT
                         ).show()
-                        val intent = Intent(activity, SignInActivity::class.java)
+                        val intent = Intent(activity, SignInUpActivity::class.java)
                         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                         startActivity(intent)
                         auth?.signOut()

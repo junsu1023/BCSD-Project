@@ -5,10 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.domain.data.user.User
-import com.example.domain.usecase.user.ChangeUserPswUseCase
-import com.example.domain.usecase.user.DeleteUserUseCase
-import com.example.domain.usecase.user.SignInWithEmailUseCase
-import com.example.domain.usecase.user.SignUpWithEmailUscCase
+import com.example.domain.usecase.user.*
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
@@ -16,7 +13,8 @@ class UserViewModel(
     private val changeUserPswUseCase: ChangeUserPswUseCase,
     private val deleteUserUseCase: DeleteUserUseCase,
     private val signInWithEmailUseCase: SignInWithEmailUseCase,
-    private val signUpWithEmailUseCase: SignUpWithEmailUscCase
+    private val signUpWithEmailUseCase: SignUpWithEmailUscCase,
+    private val getUserDataUseCase: GetUserDataUseCase
 ) : ViewModel(){
 
     private val _finishCheck = MutableLiveData<Boolean>()

@@ -8,4 +8,5 @@ interface UserRepository  {
     fun signInWithEmail(email: String, psw: String) :Flow<Result<Unit>>
     fun changeUserPsw(user: User, new_password: String) :Flow<Result<Unit>>
     fun deleteUser(uid: String) : Flow<Result<Unit>>
+    fun getUserData(uid: String): User
 }

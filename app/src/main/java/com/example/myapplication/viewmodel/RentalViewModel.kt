@@ -3,41 +3,44 @@ package com.example.myapplication.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.model.EquipmentData
-import com.example.domain.usecase.DeleteEquipmentUseCase
-import com.example.domain.usecase.GetEquipmentUseCase
+import com.example.domain.model.onSuccess
+import com.example.domain.usecase.GetEquipmentDataListUseCase
+import com.example.domain.usecase.GetEquipmentDataUseCase
 import com.example.domain.usecase.InsertEquipmentUseCase
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 class RentalViewModel(
-    private val getEquipmentUseCase: GetEquipmentUseCase,
+    private val getEquipmentDataListUseCase: GetEquipmentDataListUseCase,
+    private val getEquipmentDataUseCase: GetEquipmentDataUseCase,
     private val insertEquipmentUseCase: InsertEquipmentUseCase,
     ): ViewModel() {
-    private val _equipment = MutableLiveData<EquipmentData>()
-    val equipment: LiveData<EquipmentData> get() = _equipment
+    private val _equipmentList = MutableLiveData<List<EquipmentData>>()
+    val equipmentList: LiveData<List<EquipmentData>> get() = _equipmentList
+    private var list = listOf<EquipmentData>()
 
     private var position = -1
     private lateinit var equipmentData: EquipmentData
 
-    fun setEquipmentData(position: Int) {
-        this.position = position
-        equipmentData = if(position == -1) {
-            EquipmentData(null, "", 0, 0)
+    init {
+        getEquipmentDataList()
+    }
+
+    fun setEquipmentData(equipmentName: String) {
+        val searchEquipmentList = list.filter { it.name == equipmentName }
+        _equipmentList.value = searchEquipmentList
+    }
+
+    fun getEquipmentDataList() {
+        viewModelScope.launch {
+            getEquipmentDataListUseCase().collectLatest {
+                it.onSuccess {
+                    _equipmentList.value = it
+                    list = it
+                }
+            }
         }
-        else {
-            getEquipmentUseCase(position)
-        }
-    }
-
-    fun setImageUri(newImageUri: String?) {
-        equipmentData = equipmentData.copy(albumUri = newImageUri)
-        _equipment.value = equipmentData
-    }
-
-    fun insertEquipmentData(equipmentData: EquipmentData) {
-        insertEquipmentUseCase(equipmentData)
-    }
-
-    fun getEquipmentData(position: Int) {
-        getEquipmentUseCase(position)
     }
 }

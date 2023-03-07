@@ -35,4 +35,9 @@
     <string name="certification_for_delete">Account를 영구적으로 삭제하기 전에 먼저 비밀번호를 입력해주세요.</string>
     <string name="delete_title">본인 Account 확인</string>
     <string name="equipment">비품</string>
+    <string name="permission_dialog_title">허가 알림</string>
+    <string name="permission_dialog_message">이미지를 불러오기 위해서는 허가가 필요합니다.</string>
+    <string name="permission_ok">허가</string>
+    <string name="permission_denied">거부</string>
+    <string name="borrow_num">대여 개수</string>
 </resources>

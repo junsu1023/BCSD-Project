@@ -3,23 +3,52 @@ package com.example.myapplication.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.domain.model.EquipmentData
+import com.example.domain.model.onSuccess
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import com.example.domain.usecase.DeleteEquipmentUseCase
 import com.example.domain.usecase.GetEquipmentDataListUseCase
-import com.example.domain.usecase.GetEquipmentUseCase
+import com.example.domain.usecase.InsertEquipmentUseCase
 
 class EquipmentListViewModel (
     private val getEquipmentDataListUseCase: GetEquipmentDataListUseCase,
-    private val deleteEquipmentUseCase: DeleteEquipmentUseCase)
+    private val deleteEquipmentUseCase: DeleteEquipmentUseCase,
+    private val insertEquipmentUseCase: InsertEquipmentUseCase)
 : ViewModel(){
-    private val _equipmentList = MutableLiveData<ArrayList<EquipmentData>>()
-    val equipmentList: LiveData<ArrayList<EquipmentData>> get() = _equipmentList
+    private val _equipmentList = MutableLiveData<List<EquipmentData>>()
+    val equipmentList: LiveData<List<EquipmentData>> get() = _equipmentList
+    private var list = listOf<EquipmentData>()
 
     init {
-        _equipmentList.value = getEquipmentDataListUseCase()
+        getEquipmentDataList()
     }
 
-    fun removeEquipmentData(position: Int) {
-        deleteEquipmentUseCase(position)
+    fun removeEquipmentData(name : String) {
+        viewModelScope.launch {
+            deleteEquipmentUseCase(name)
+        }
+    }
+
+    fun getEquipmentDataList() {
+        viewModelScope.launch {
+            getEquipmentDataListUseCase().collectLatest {
+                it.onSuccess {
+                    _equipmentList.value = it
+                    list = it
+                }
+            }
+        }
+    }
+
+    fun insertEquipmentData(equipmentData: EquipmentData){
+        viewModelScope.launch {
+            insertEquipmentUseCase(equipmentData)
+        }
+    }
+    fun searchEquipment(equipmentName: String) {
+        val searchEquipmentList = list.filter { it.name == equipmentName }
+        _equipmentList.value = searchEquipmentList
     }
 }
